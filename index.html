@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AGP Globe</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/three@0.121.1/build/three.min.js"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+</head>
+<body>
+    <div id="header">
+    <img class="logo" src="assets/logo.svg" alt="AGP Logo" />
+
+    <p class="default-text">
+        Affinity Group Publishing is a global network of hyper-local and niche publications. Click on the dots to explore AGPs across the US.
+    </p>
+
+    <div class="agp-info">
+        <div class="agp-name"></div>
+        <div class="agp-description"></div>
+        <a class="visit-button" href="#" target="_blank">Visit Publication</a>
+    </div>
+    </div>
+
+  <div id="globeViz"></div>
+  <div class="tooltip" id="tooltip"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

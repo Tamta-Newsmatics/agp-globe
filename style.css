@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body, html {
+  height: 100%;
+  overflow: hidden;
+  background-color: #0f0f17;
+  color: white;
+}
+
+#globeViz {
+  width: 100vw;
+  height: 100vh;
+}
+
+.tooltip {
+  position: absolute;
+  background: white;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  z-index: 20;
+  display: none;
+}
+
+#header {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10;
+  width: 360px;
+  height: 200px;
+  background: rgba(28, 28, 41, 0.85);
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow: hidden;
+}
+
+#header .logo {
+  width: 120px;
+  height: auto;
+}
+
+#header .default-text {
+  font-size: 15px;
+  color: #e0d9e9;
+  line-height: 1.5;
+  display: block;
+}
+
+#header .agp-info {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  color: #e0d9e9;
+}
+
+#header .agp-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#header .agp-description {
+  font-size: 14px;
+}
+
+#header .visit-button {
+  margin-top: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #B9065D;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  align-self: flex-start;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(0);
+}
+
+#header .visit-button::after {
+  content: "→";
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+#header .visit-button:hover {
+  background-color: #9c054f;
+  transform: translateY(2px);
+}
+
+#header .visit-button:hover::after {
+  transform: translateX(3px);
+}
