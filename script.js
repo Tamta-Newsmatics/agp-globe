@@ -1,116 +1,174 @@
-const agps = [
-  {
-    lat: 34.0522,
-    lng: -118.2437,
-    label: "California Business Journal",
-    description: "Business news from California.",
-    url: "https://californiabusinessjournal.com"
-  },
-  {
-    lat: 40.7128,
-    lng: -74.006,
-    label: "Crypto Times Gazette",
-    description: "Latest on crypto trends.",
-    url: "https://cryptotimesgazette.com"
-  },
-  {
-    lat: 41.8781,
-    lng: -87.6298,
-    label: "Chicago Local News",
-    description: "What’s happening in Chicago.",
-    url: "#"
-  },
-  {
-    lat: 29.7604,
-    lng: -95.3698,
-    label: "Houston Industry Review",
-    description: "Houston's economic pulse.",
-    url: "#"
-  }
-];
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-// Add more US points
-for (let i = 0; i < 150; i++) {
-  agps.push({
-    lat: 24 + Math.random() * 26,
-    lng: -125 + Math.random() * 59,
-    label: `AGP ${i + 1}`,
-    description: "A local AGP publication.",
-    url: "#"
-  });
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-// Add Europe points
-for (let i = 0; i < 30; i++) {
-  agps.push({
-    lat: 35 + Math.random() * 30, // Europe
-    lng: -10 + Math.random() * 50,
-    label: `AGP Europe ${i + 1}`,
-    description: "A European AGP publication.",
-    url: "#"
-  });
+body, html {
+  height: 100%;
+  overflow: hidden;
+  background-color: #0f0f17;
+  color: white;
 }
 
-const tooltip = document.getElementById("tooltip");
-
-const globe = Globe()(document.getElementById('globeViz'))
-  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-  .backgroundColor('#0f0f17')
-  .pointLat('lat')
-  .pointLng('lng')
-  .pointAltitude(() => 0.01)
-  .pointRadius(() => 0.15)
-  .pointColor(() => '#B9065D')
-  .pointsData(agps)
-  .onPointHover(point => {
-    tooltip.style.display = point ? 'block' : 'none';
-    tooltip.innerHTML = point ? point.label : '';
-  })
-  .onPointClick(point => {
-    showAGPInfo(point);
-  });
-
-window.addEventListener('mousemove', e => {
-  tooltip.style.left = e.pageX + 'px';
-  tooltip.style.top = (e.pageY - 10) + 'px';
-});
-
-window.addEventListener('click', e => {
-  if (!e.target.closest('#globeViz') && !e.target.closest('#header') && !e.target.closest('#searchBox')) {
-    showAGPInfo(null);
-  }
-});
-
-const defaultText = document.querySelector(".default-text");
-const agpInfoBox = document.querySelector(".agp-info");
-const nameElem = document.querySelector(".agp-name");
-const descElem = document.querySelector(".agp-description");
-const visitBtn = document.querySelector(".visit-button");
-
-function showAGPInfo(point) {
-  if (point) {
-    defaultText.style.display = "none";
-    agpInfoBox.style.display = "flex";
-
-    nameElem.textContent = point.label || "Unnamed Publication";
-    nameElem.style.display = "block";  // <--- Ensure it's visible
-
-    descElem.textContent = point.description || "No description available.";
-    descElem.style.display = "block";
-
-    visitBtn.href = point.url || "#";
-    visitBtn.style.display = "inline-flex";
-  } else {
-    agpInfoBox.style.display = "none";
-    defaultText.style.display = "block";
-  }
+#globeViz {
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
 }
 
-// Toggle Search Panel
-const toggleSearch = document.getElementById("toggleSearch");
-const searchBox = document.getElementById("searchBox");
+.tooltip {
+  position: absolute;
+  background: white;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  z-index: 20;
+  display: none;
+}
 
-toggleSearch.addEventListener("click", () => {
-  const active = searchBox.classList.toggle("active");
-  toggleSearch.src = active ? "assets/x.svg" : "assets/search.svg";
-});
+#header {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10;
+  width: 360px;
+  height: 200px;
+  background: rgba(28, 28, 41, 0.85);
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow: hidden;
+}
+
+#header .agp-name {
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.divider {
+  height: 1px;
+  background-color: #444;
+  margin: 4px 0;
+}
+
+.default-text {
+  font-size: 15px;
+  color: #e0d9e9;
+  line-height: 1.5;
+}
+
+.agp-info {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  color: #e0d9e9;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.agp-description {
+  font-size: 14px;
+}
+
+.visit-button {
+  margin-top: auto;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #B9065D;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  align-self: flex-start;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.visit-button::after {
+  content: "→";
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.visit-button:hover {
+  background-color: #9c054f;
+  transform: translateY(2px);
+}
+
+.visit-button:hover::after {
+  transform: translateX(3px);
+}
+
+/* Search Box */
+
+.search-box {
+  position: absolute;
+  bottom: 230px;
+  left: 20px;
+  z-index: 11;
+  width: 360px;
+  height: 240px;
+  background: rgba(28, 28, 41, 0.95);
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateX(-420px);  /* offscreen to the left */
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.search-box.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.search-box h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.search-box select,
+.search-box input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+.search-box select:focus,
+.search-box input:focus {
+  outline: 2px solid #B9065D;
+}
