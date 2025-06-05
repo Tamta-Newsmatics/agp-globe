@@ -54,7 +54,7 @@ for (let i = 0; i < 30; i++) {
 const tooltip = document.getElementById("tooltip");
 
 const globe = Globe()(document.getElementById('globeViz'))
-  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
   .backgroundColor('#0f0f17')
   .pointLat('lat')
   .pointLng('lng')
@@ -110,7 +110,11 @@ function showAGPInfo(point) {
 const toggleSearch = document.getElementById("toggleSearch");
 const searchBox = document.getElementById("searchBox");
 
-toggleSearch.addEventListener("click", () => {
-  const active = searchBox.classList.toggle("active");
-  toggleSearch.src = active ? "assets/x.svg" : "assets/search.svg";
-});
+if (toggleSearch) {
+  toggleSearch.addEventListener("click", () => {
+    const active = searchBox.classList.toggle("active");
+    toggleSearch.src = active ? "assets/x.svg" : "assets/search.svg";
+  });
+} else {
+  console.error("toggleSearch element not found");
+}
