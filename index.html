@@ -9,23 +9,42 @@
   <script src="https://unpkg.com/globe.gl"></script>
 </head>
 <body>
-    <div id="header">
-    <img class="logo" src="assets/logo.svg" alt="AGP Logo" />
-
+  <div id="header">
+    <div class="header-top">
+      <img class="logo" src="assets/logo.svg" alt="AGP Logo" />
+      <img class="search-icon" src="assets/search.svg" alt="Search" id="toggleSearch" />
+    </div>
+    <div class="divider"></div>
     <p class="default-text">
-        Affinity Group Publishing is a global network of hyper-local and niche publications. Click on the dots to explore AGPs across the US.
+      Affinity Group Publishing is a global network of hyper-local and niche publications. Click on the dots to explore AGPs across the US.
     </p>
-
     <div class="agp-info">
-        <div class="agp-name"></div>
-        <div class="agp-description"></div>
-        <a class="visit-button" href="#" target="_blank">Visit Publication</a>
+      <div class="agp-name"></div> 
+      <div class="agp-description">Here you will see a short description of the AGP.</div>
+      <a class="visit-button" href="#" target="_blank">Visit Publication</a>
     </div>
-    </div>
+  </div>
+
+  <div id="searchBox" class="search-box">
+    <h3>What are you looking for?</h3>
+    <select>
+      <option selected disabled>Choose Country</option>
+      <option>USA</option>
+      <option>UK</option>
+      <option>Germany</option>
+    </select>
+    <select>
+      <option selected disabled>Choose State / City</option>
+      <option>New York</option>
+      <option>California</option>
+      <option>Berlin</option>
+    </select>
+    <input type="text" placeholder="Enter topic or keywords..." />
+    <button class="visit-button">Search</button>
+  </div>
 
   <div id="globeViz"></div>
   <div class="tooltip" id="tooltip"></div>
-
   <script src="script.js"></script>
 </body>
 </html>

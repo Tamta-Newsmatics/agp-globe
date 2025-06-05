@@ -29,13 +29,24 @@ const agps = [
   }
 ];
 
-// Generate dummy dots inside continental US
+// Add more US points
 for (let i = 0; i < 150; i++) {
   agps.push({
     lat: 24 + Math.random() * 26,
     lng: -125 + Math.random() * 59,
     label: `AGP ${i + 1}`,
     description: "A local AGP publication.",
+    url: "#"
+  });
+}
+
+// Add Europe points
+for (let i = 0; i < 30; i++) {
+  agps.push({
+    lat: 35 + Math.random() * 30, // Europe
+    lng: -10 + Math.random() * 50,
+    label: `AGP Europe ${i + 1}`,
+    description: "A European AGP publication.",
     url: "#"
   });
 }
@@ -50,14 +61,13 @@ const globe = Globe()(document.getElementById('globeViz'))
   .pointAltitude(() => 0.01)
   .pointRadius(() => 0.15)
   .pointColor(() => '#B9065D')
-  //.pointLabel('label')   // <-- remove this line
   .pointsData(agps)
   .onPointHover(point => {
     tooltip.style.display = point ? 'block' : 'none';
     tooltip.innerHTML = point ? point.label : '';
   })
   .onPointClick(point => {
-    showAGPInfo(point); // Show info in the box on click
+    showAGPInfo(point);
   });
 
 window.addEventListener('mousemove', e => {
@@ -66,8 +76,7 @@ window.addEventListener('mousemove', e => {
 });
 
 window.addEventListener('click', e => {
-  // If clicked outside the globe container or dots, hide info box and show default text
-  if (!e.target.closest('#globeViz')) {
+  if (!e.target.closest('#globeViz') && !e.target.closest('#header') && !e.target.closest('#searchBox')) {
     showAGPInfo(null);
   }
 });
@@ -82,8 +91,13 @@ function showAGPInfo(point) {
   if (point) {
     defaultText.style.display = "none";
     agpInfoBox.style.display = "flex";
+
     nameElem.textContent = point.label || "Unnamed Publication";
+    nameElem.style.display = "block";  // <--- Ensure it's visible
+
     descElem.textContent = point.description || "No description available.";
+    descElem.style.display = "block";
+
     visitBtn.href = point.url || "#";
     visitBtn.style.display = "inline-flex";
   } else {
@@ -92,3 +106,11 @@ function showAGPInfo(point) {
   }
 }
 
+// Toggle Search Panel
+const toggleSearch = document.getElementById("toggleSearch");
+const searchBox = document.getElementById("searchBox");
+
+toggleSearch.addEventListener("click", () => {
+  const active = searchBox.classList.toggle("active");
+  toggleSearch.src = active ? "assets/x.svg" : "assets/search.svg";
+});
