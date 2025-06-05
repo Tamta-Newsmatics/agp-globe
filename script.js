@@ -17,7 +17,7 @@ const agps = [
     lat: 41.8781,
     lng: -87.6298,
     label: "Chicago Local News",
-    description: "What’s happening in Chicago.",
+    description: "What is happening in Chicago.",
     url: "#"
   },
   {
