@@ -2,49 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AGP Globe</title>
+  <title>Simple Globe with Countries</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/three@0.121.1/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.136.0/build/three.min.js"></script>
   <script src="https://unpkg.com/globe.gl"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
 </head>
 <body>
-  <div id="header">
-    <div class="header-top">
-      <img class="logo" src="assets/logo.svg" alt="AGP Logo" />
-      <img class="search-icon" src="assets/search.svg" alt="Search" id="toggleSearch" />
-    </div>
-    <div class="divider"></div>
-    <p class="default-text">
-      Affinity Group Publishing is a global network of hyper-local and niche publications. Click on the dots to explore AGPs across the US.
-    </p>
-    <div class="agp-info">
-      <div class="agp-name"></div> 
-      <div class="agp-description">Here you will see a short description of the AGP.</div>
-      <a class="visit-button" href="#" target="_blank">Visit Publication</a>
-    </div>
-  </div>
-
-  <div id="searchBox" class="search-box">
-    <h3>What are you looking for?</h3>
-    <select>
-      <option selected disabled>Choose Country</option>
-      <option>USA</option>
-      <option>UK</option>
-      <option>Germany</option>
-    </select>
-    <select>
-      <option selected disabled>Choose State / City</option>
-      <option>New York</option>
-      <option>California</option>
-      <option>Berlin</option>
-    </select>
-    <input type="text" placeholder="Enter topic or keywords..." />
-    <button class="visit-button">Search</button>
-  </div>
-
   <div id="globeViz"></div>
   <div class="tooltip" id="tooltip"></div>
+
+  <!-- Static Sidebar Info Box -->
+  <div id="infoBox1" class="info-box">
+    <img src="assets/logo.SVG" alt="AGP Logo" class="info-logo" />
+    <p class="info-text">
+      Discover news from around the globe. Click or search to explore.
+    </p>
+
+    <form id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search topics..." />
+      <button type="submit" id="searchBtn">
+        <img src="assets/search.svg" alt="Search" />
+      </button>
+    </form>
+  </div>
+
+  <!-- Sliding Panel Info Box -->
+  <div id="infoBox2" class="info-box">
+    <button id="closeInfoBox2" class="close-btn">✕</button>
+    <div class="pub-list">
+      <!-- Publication items injected dynamically -->
+    </div>
+  </div>
+
+  <!-- Zoom UI -->
+  <div class="zoom-controls">
+    <button id="zoomIn">＋</button>
+    <button id="zoomOut">−</button>
+  </div>
+
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
