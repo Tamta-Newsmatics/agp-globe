@@ -71,6 +71,8 @@ fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
       'artswirecookislands'
     ];
 
+
+
     function showInfoBox2() {
       infoBox2.classList.add('visible');
       pubList.innerHTML = '';
@@ -78,7 +80,7 @@ fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
       pubs.forEach(name => {
         const item = document.createElement('div');
         item.className = 'pub-item';
-
+      
         item.innerHTML = `
           <img src="https://raw.githubusercontent.com/Tamta-Newsmatics/agp-globe/main/assets/${name}.svg" alt="${name}" class="pub-item-logo" />
           <button class="pub-item-button">View publication</button>
