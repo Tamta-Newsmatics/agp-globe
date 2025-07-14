@@ -82,7 +82,7 @@ fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
         item.className = 'pub-item';
       
         item.innerHTML = `
-          <img src="https://raw.githubusercontent.com/Tamta-Newsmatics/agp-globe/main/assets/${name}.svg" alt="${name}" class="pub-item-logo" />
+          <img src="https://tamta-newsmatics.github.io/agp-globe/assets/${name}.svg" alt="${name}" class="pub-item-logo" />
           <button class="pub-item-button">View publication</button>
         `;
 
